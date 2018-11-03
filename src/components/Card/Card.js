@@ -3,7 +3,7 @@ import Row from '../Row/Row';
 import { ThemeContext, LocaleContext } from '../../context';
 import './card.scss';
 
-class Card extends Component {
+export default class Card extends Component {
 
   constructor(props) {
     super(props);
@@ -19,6 +19,14 @@ class Card extends Component {
     this.setState({
       [e.target.id]: e.target.value
     })
+  }
+
+  componentDidMount() {
+    document.title = this.state.name + ' ' + this.state.lastname;
+  }
+
+  componentDidUpdate() {
+    document.title = this.state.name + ' ' + this.state.lastname;
   }
 
   render() {
@@ -45,5 +53,3 @@ class Card extends Component {
     );
   }
 }
-
-export default Card;

@@ -1,6 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Row from '../Row/Row';
 import { ThemeContext, LocaleContext } from '../../context';
+import useFormInput from '../hooks/useFormInput';
 import './card.scss';
 
 export default function CardWithHooks() {
@@ -9,6 +10,10 @@ export default function CardWithHooks() {
   const { theme } = useContext(ThemeContext);
   const { locale } = useContext(LocaleContext);
   
+  useEffect(() => {
+    document.title = name.value + ' ' + lastname.value;
+  });
+
   return (
     <section className={theme}>
       <Row label="Nome">
@@ -22,18 +27,4 @@ export default function CardWithHooks() {
       </Row>
     </section>
   );
-}
-
-// Custom React Hook
-function useFormInput(initialValue) {
-  const [value, setValue] = useState(initialValue);
-
-  function handlerChange(e) {
-    setValue(e.target.value);
-  }
-  
-  return {
-    value: value,
-    onChange: handlerChange
-  }
 }
